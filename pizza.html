@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzería Juanini</title>
+</head>
+<style>
+    select {
+        width: 300px;
+    }
+
+    .contenedor {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .ingredientes {
+        gap: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
+<body>
+    <select id="listaIngredientes" size="7">
+        <option value="1" selected="true">Tomate</option>
+        <option value="1.2">Cebolla</option>
+        <option value="0.9">Pepinillo</option>
+        <option value="0.8">Mozzarela</option>
+    </select>
+    <br>
+    <br>
+    <div class="contenedor">
+        <div class="ingredientes">
+            <button id="nuevoIngrediente">Nuevo ingrediente</button>
+            <br>
+            <button id="agregarIngrediente">Agregar ingrediente</button>
+            <br>
+            <button id="quitarIngrediente">Quitar ingrediente</button>
+        </div>
+        <div class="ingredientes">
+            <button id="eliminarIngrediente">Eliminar ingrediente</button>
+            <br>
+            <br>
+            <button id="quitarTodos">Quitar todos los ingredientes</button>
+        </div>
+    </div>
+    <br>
+    <select id="ingredientesPizza" size="7">
+
+    </select>
+    <br>
+    <br>
+    <button id="comprar">Efectuar pedido</button>
+    <h1 id="precio">Precio: 0</h1>
+</body>
+<script>
+    let listaIngredientes = document.getElementById("listaIngredientes");
+    let listaPizza = document.getElementById("ingredientesPizza");
+
+    function nuevoIngrediente() {
+        let nombre = prompt("Nombre del ingrediente");
+        let precio = prompt("Valor del ingrediente");
+        let ingrediente = document.createElement("option");
+        ingrediente.value = precio;
+        ingrediente.innerText = nombre;
+        document.getElementById("listaIngredientes").add(ingrediente);
+    }
+
+    function agregarIngrediente() {
+        let pos = listaIngredientes.selectedIndex;
+        if (pos != -1) {
+            let ingrediente = listaIngredientes[pos];
+            listaPizza.add(ingrediente);
+            ponerPrecio();
+        }
+    }
+
+    function quitarIngrediente() {
+        let pos = listaPizza.selectedIndex;
+        if (pos != -1) {
+            let ingrediente = listaPizza[pos];
+            listaIngredientes.add(ingrediente);
+            ponerPrecio();
+        }
+    }
+
+    function eliminarIngrediente() {
+        let pos = listaIngredientes.selectedIndex;
+        if (pos != -1) {
+            let ingrediente = listaIngredientes[pos];
+            listaIngredientes.remove(ingrediente);
+            ponerPrecio();
+        }
+    }
+
+    function quitarTodos() {
+        listaIngredientes.innerHTML += listaPizza.outerHTML;
+        listaPizza.innerHTML = "";
+        ponerPrecio();
+    }
+
+    function ponerPrecio() {
+        let suma = 0;
+        let precio = document.getElementById("precio");
+        console.log(listaPizza)
+        if (listaPizza.value != "") {
+            suma = 3;
+            for (let pos = 0; pos < listaPizza.length; pos++) {
+                suma += parseFloat(listaPizza[pos].value);
+            }
+        }
+        precio.innerHTML = "Precio: " + suma;
+    }
+    function comprar() {
+        alert("Dejate de tonterias pobre!!")
+    }
+
+    window.onload = () => {
+        document.getElementById("nuevoIngrediente").addEventListener("click", nuevoIngrediente);
+        document.getElementById("agregarIngrediente").addEventListener("click", agregarIngrediente);
+        document.getElementById("quitarIngrediente").addEventListener("click", quitarIngrediente);
+        document.getElementById("eliminarIngrediente").addEventListener("click", eliminarIngrediente);
+        document.getElementById("quitarTodos").addEventListener("click", quitarTodos);
+        document.getElementById("precio").addEventListener("click", ponerPrecio);
+        document.getElementById("comprar").addEventListener("click", comprar);
+    }
+</script>
+
+</html>

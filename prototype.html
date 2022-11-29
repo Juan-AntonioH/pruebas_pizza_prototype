@@ -1,0 +1,67 @@
+<script>
+    //////////
+    ////PROTOTYPE STRING
+    /////////
+
+    // let pepe = prompt("dime algo");
+    // let a = prompt("elige la letra");
+    // String.prototype.contar = function (n) {
+    //     let cantidad = 0;
+    //     for (let index = 0; index < this.length; index++) {
+    //         this.charAt(index) == n ? cantidad++ : "";
+
+    //     }
+    //     console.log("La letra " + n + " está " + cantidad + " veces.");
+    // }
+
+    // pepe.contar(a);
+    // console.log(pepe)
+
+
+    // String.prototype.texto = function (n) {
+    //     console.log(this.valueOf())
+    // }
+
+    // let aaw="pepe";
+    // aaw.texto()
+
+
+    ////////////
+    ////PROTOTYPE FECHA
+    ////////////
+
+    // Date.prototype.fecha = function () {
+    //     let dia = this.getDate() < 10 ? "0" + this.getDate() : this.getDate();
+    //     let mes = this.getMonth() < 10 ? "0" + this.getMonth() : this.getMonth();
+    //     return dia + "/" + mes + "/" + this.getFullYear()
+    // }
+    // let d = new Date();
+    // alert(d.fecha());
+
+
+    Date.prototype.addDays = function (days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+
+    var date = new Date();
+    console.log(date.addDays(5));
+
+
+
+//Diferencia de dias
+    var fechaInicio = new Date('2016-08-01').getTime();
+    var fechaFin = new Date('2016-08-12').getTime();
+
+    var diff = fechaFin - fechaInicio;
+    console.log(diff / (1000 * 60 * 60 * 24));
+
+    let fechaInicio2='2016/08/01';
+    let fechaFin2='2016/08/12';
+    let fechaFin3='2016-08-12';
+    console.log(fechaFin2.replace(/\//g,""))
+    console.log(fechaFin3.replace(/-/g,""))
+    console.log("fecha inicio "+fechaInicio.toString()+" Fecha fin "+fechaFin.toString())
+
+</script>
